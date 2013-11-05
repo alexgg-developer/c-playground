@@ -1,9 +1,10 @@
+#pragma once
+#ifndef _VEHICLE_HPP_
+#define _VEHICLE_HPP_
+
 class Vehicle 
 {
-
 public: 
-  Vehicle();
-public:  
   enum TypeOfTerrain {
     WATER,
     SOIL,
@@ -13,3 +14,5 @@ public:
   int mNumDoors;
   TypeOfTerrain mTypeOfTerrain;
 };
+
+#endif
