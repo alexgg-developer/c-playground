@@ -17,6 +17,6 @@ int main(int argc, char *argv[]) {
   std:: cout << c->mTypeOfTerrain << std::endl;     
   std:: cout << c->mNumDoors << std::endl;     
   std:: cout << c->mNumWheels << std::endl;     
-
+  c->setNumSeats(5);
   //Por 19.4
 }

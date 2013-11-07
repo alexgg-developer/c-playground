@@ -9,6 +9,9 @@ class Car : public Vehicle
 public: 
   Car() { mTypeOfTerrain = TypeOfTerrain::SOIL;}
   Car(Vehicle* c) { mTypeOfTerrain = c->mTypeOfTerrain; }
+
+  void printCountry();
+  void setNumSeats(int numSeats);
 };
 
 #endif

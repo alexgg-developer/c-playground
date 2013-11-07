@@ -2,6 +2,8 @@
 #ifndef _VEHICLE_HPP_
 #define _VEHICLE_HPP_
 
+#include <string>
+
 class Vehicle 
 {
 public: 
@@ -13,6 +15,10 @@ public:
   int mNumWheels;
   int mNumDoors;
   TypeOfTerrain mTypeOfTerrain;
+private:
+  std::string mCountry;
+protected:
+  int mNumSeats;
 };
 
 #endif
