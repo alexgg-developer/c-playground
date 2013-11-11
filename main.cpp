@@ -18,5 +18,9 @@ int main(int argc, char *argv[]) {
   std:: cout << c->mNumDoors << std::endl;     
   std:: cout << c->mNumWheels << std::endl;     
   c->setNumSeats(5);
+  int i = 5;
+  std::vector<const int> vec(1, 30); 
+  //vec[0] = 30;
+  c->constPrueba(vec, i);
   //Por 19.4
 }

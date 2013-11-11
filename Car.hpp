@@ -3,6 +3,7 @@
 #define _CAR_HPP_
 
 #include "Vehicle.hpp"
+#include <vector>
 
 class Car : public Vehicle 
 {
@@ -12,6 +13,7 @@ public:
 
   void printCountry();
   void setNumSeats(int numSeats);
+  void constPrueba(const std::vector<const int> & v, const int i);
 };
 
 #endif
