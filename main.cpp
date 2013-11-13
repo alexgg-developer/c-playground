@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Vehicle.hpp"
 #include "Car.hpp"
+#include "Singleton.hpp"
 
 int main(int argc, char *argv[]) {
   Vehicle *v = new Vehicle;
@@ -23,4 +24,12 @@ int main(int argc, char *argv[]) {
   //vec[0] = 30;
   c->constPrueba(vec, i);
   //Por 19.4
+  Singleton &S = Singleton::getInstance();
+  Singleton &S2 = Singleton::getInstance();
+  S.a = 5;
+  std::cout << "S.a 1: " << S.a << std::endl;
+  std::cout << "S.a 2: " << S2.a << std::endl;
+  S2.b = 6;
+  std::cout << "S.b 1: " << S.b << std::endl;
+  std::cout << "S2.b 2: " << S2.b << std::endl;
 }
