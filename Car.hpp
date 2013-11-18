@@ -14,6 +14,7 @@ public:
   void printCountry();
   void setNumSeats(int numSeats);
   void constPrueba(const std::vector<const int> & v, const int i);
+  virtual void virtualClassExample();
 };
 
 #endif
