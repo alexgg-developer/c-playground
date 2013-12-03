@@ -2,8 +2,13 @@
 #include "Vehicle.hpp"
 #include "Car.hpp"
 #include "Singleton.hpp"
+#include "InheritanceClasses.hpp"
 #include <mutex> //THREADS
 #include <thread>
+#include <vector>
+
+bool ready = false;
+std::mutex mtx;
 
 void mainInheritance()
 {  
@@ -67,6 +72,7 @@ void mainTypedef()
 
 void mainVirtual()
 {
+  //FAQ 20
   Vehicle * v = new Vehicle();
   v->virtualClassExample();
   Car * car = new Car();
@@ -75,6 +81,54 @@ void mainVirtual()
   v->virtualClassExample();
   Car * c = new Car(v);
   c->virtualClassExample();
+
+  Vehicle* vv = new Vehicle();
+  Car* cc = new Car();
+  std::vector<Vehicle*> lotsOfV;
+  lotsOfV.push_back(vv);
+  lotsOfV.push_back(cc);
+  lotsOfV[0]->virtualClassExample();
+  lotsOfV[1]->virtualClassExample();
+
+  Vehicle vvv;
+  Car ccc;
+  std::vector<Vehicle> lotsOfVV;
+  lotsOfVV.push_back(vvv);
+  lotsOfVV.push_back(ccc);
+  lotsOfV[0]->virtualClassExample();
+  lotsOfV[1]->virtualClassExample();
+}
+
+void lock1()
+{  
+  std::unique_lock<std::mutex> lck(mtx);
+  std::cout << "Principio" <<  std::this_thread::get_id() << std::endl;
+  while(!ready);
+  std::cout << "Final" <<  std::this_thread::get_id() << std::endl;
+}
+
+void setReady(unsigned int n)
+{
+  std::this_thread::sleep_for (std::chrono::seconds(n));
+  ready = true;
+}
+void mainLocks()
+{
+  std::cout << "Main" <<  std::this_thread::get_id() << std::endl;  
+  std::thread t1(lock1);
+  std::thread t2(lock1);
+
+  std::thread t3(setReady, 15);
+  t3.join();
+  t1.join();
+  t2.join();
+}
+
+void mainPrivateInheritance()
+{
+  D_priv d;
+  d.doThings();
+  d.publicB();
 }
 
 int main(int argc, char *argv[]) 
@@ -83,5 +137,7 @@ int main(int argc, char *argv[])
   //mainSingleton();
   //mainMutex();
   //mainTypedef();
-  mainVirtual();
+  //mainVirtual();
+  //mainLocks();
+  mainPrivateInheritance();
 }
