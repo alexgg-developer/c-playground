@@ -13,9 +13,9 @@ void Car::setNumSeats(int numSeats)
   std::cout << "Number of seats: " << mNumSeats << std::endl;    
 }
 
-void Car::constPrueba(const std::vector<const int> & v, const int i)
+/*void Car::constPrueba(const std::vector<const int> & v, const int i)
 {
   std::cout << "v[0] : " << v[0] << " i: " << i << std::endl;
-}
+}*/
 
 void Car::virtualClassExample() { std::cout << "I'm the derived function class" << std::endl; }
