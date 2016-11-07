@@ -27,6 +27,7 @@ void mainInheritance()
   std:: cout << c->mNumDoors << std::endl;     
   std:: cout << c->mNumWheels << std::endl;     
   c->setNumSeats(5);
+  
   //int i = 5;
   //std::vector<const int> vec(1, 30);  
   // can't be created a vector of const type because in case the vector needs to grow the elements need to be copied
