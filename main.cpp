@@ -3,6 +3,8 @@
 #include "Car.hpp"
 #include "Singleton.hpp"
 #include "InheritanceClasses.hpp"
+#include "Extern_A.hpp"
+#include "Extern_B.hpp"
 #include <mutex> //THREADS
 #include <thread>
 #include <vector>
@@ -133,6 +135,13 @@ void mainPrivateInheritance()
   d.publicB();
 }
 
+void mainExtern()
+{
+	//Extern_A::printGA();
+	//Extern_B::printGA();
+	printGA();
+}
+
 int main(int argc, char *argv[]) 
 {
   //mainInheritance();
@@ -142,6 +151,7 @@ int main(int argc, char *argv[])
   //mainVirtual();
   //mainLocks();
   //mainPrivateInheritance();
+  mainExtern();
 	getchar();
 	return 0;
 }

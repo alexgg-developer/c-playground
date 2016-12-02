@@ -1,6 +1,8 @@
 #include "Car.hpp"
 #include <iostream>
 
+int g_a(5);
+
 void Car::printCountry()
 {
   //std::cout << mCountry << std::endl;    

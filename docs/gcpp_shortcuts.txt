@@ -1,0 +1,3 @@
+g++ shortcuts
+----------------
+ g++ -Wall -std=c++11 main.cpp Car.cpp -o main.exe
