@@ -56,3 +56,32 @@ namespace Constants
 -Avoid C-style casts (float)3, float(3). Instead use static_cast.
 -Use enum class instead of enum
 -typedef double distance_t; vs using distance_t = double;
+-Prefer unique_ptr to shared_ptr.
+-Prefer initialization over assignment.
+-Use explicit for constructors.
+
+--PERFORMANCE--
+
+-Try to use reserve when initialisiting a large vector.
+
+-Better use of references in data structures:
+
+Use this:
+
+X *getX(string key, unordered_map<string, unique_ptr<X>> &cache) {
+	unique_ptr<X> &entry = cache[key];
+	if(entry)
+		return entry.get();
+	entry = make_unique<X>(...);
+	return entry.get;
+}
+
+instead of: 
+
+X *getX(string key, unordered_map<string, unique_ptr<X>> &cache){
+	if(cache[key])
+		return cache[key].get();
+	cache[key] = make_unique<X>(...);
+	return cache[key].get;
+}
+

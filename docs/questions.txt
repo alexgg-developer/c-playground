@@ -1,0 +1,233 @@
+1)
+
+#include <iostream>
+
+int main(int argc, char **argv)
+{
+    std::cout << 25u - 50;
+    return 0;
+}
+
+The answer is not -25. Rather, the answer (which will surprise many) is 4294967271, assuming 32 bit integers. Why?
+
+In C++, if the types of two operands differ from one another, then the operand with the “lower type” will be promoted to the type of the “higher type” operand, using the following type hierarchy (listed here from highest type to lowest type): long double, double, float, unsigned long int, long int, unsigned int, int (lowest).
+
+So when the two operands are, as in our example, 25u (unsigned int) and 50 (int), the 50 is promoted to also being an unsigned integer (i.e., 50u).
+
+Moreover, the result of the operation will be of the type of the operands. Therefore, the result of 25u - 50u will itself be an unsigned integer as well. So the result of -25 converts to 4294967271 when promoted to being an unsigned integer.
+
+2)
+
+Implement a template function IsDerivedFrom() that takes class C and class P as template parameters. It should return true when class C is derived from class P and false otherwise.
+
+This question tests understanding of C++ templates. An experienced developer will know that this is already a part of the C++11 std library (std::is_base_of) or part of the boost library for C++ (boost::is_base_of). Even an interviewee with only passing knowledge should write something similar to this, mostly likely involving a helper class:
+
+template<typename D, typename B>
+class IsDerivedFromHelper
+{
+    class No { };
+    class Yes { No no[3]; };
+    
+    static Yes Test( B* );
+    static No Test( ... );
+public:
+    enum { Is = sizeof(Test(static_cast<D*>(0))) == sizeof(Yes) };
+    
+};
+
+
+template <class C, class P> 
+bool IsDerivedFrom() {
+    return IsDerivedFromHelper<C, P>::Is;
+}
+
+3)
+
+Implement a template boolean IsSameClass() that takes class A and B as template parameters. It should compare class A and B and return false when they are different classes and true if they are the same class.
+
+template <typename T, typename U>
+struct is_same
+{
+    static const bool value = false;
+};
+
+template <typename T>
+struct is_same<T, T>
+{
+    static const bool value = true;
+};
+
+
+template <class A, class B>
+bool IsSameClass() {
+    return is_same<A, B>::value;
+}
+
+4)
+
+You are given library class Something as follows:
+
+class Something {
+public:
+    Something() {
+        topSecretValue = 42;
+    }
+    bool somePublicBool;
+    int somePublicInt;
+    std::string somePublicString;
+private:
+    int topSecretValue;
+};
+
+Implement a method to get topSecretValue for any given Something* object. The method should be cross-platform compatible and not depend on sizeof (int, bool, string).
+
+Solution:
+
+Create another class which has all the members of Something in the same order, but has additional public method which returns the value. Your replica Something class should look like:
+
+class SomethingReplica {
+public:
+    int getTopSecretValue() { return topSecretValue; }
+    bool somePublicBool;
+    int somePublicInt;
+    std::string somePublicString;
+private:
+    int topSecretValue;
+};
+Then, to get the value:
+
+int main(int argc, const char * argv[]) {
+    Something a;
+    SomethingReplica* b = reinterpret_cast<SomethingReplica*>(&a);
+    std::cout << b->getTopSecretValue();
+}
+
+It’s important to avoid code like this in a final product, but it’s nevertheless a good technique when dealing with legacy code, as it can be used to extract intermediate calculation values from a library class. (Note: If it turns out that the alignment of the external library is mismatched to your code, you can resolve this using #pragma pack.)
+
+5)
+
+When you should use virtual inheritance?
+
+While it’s ideal to avoid virtual inheritance altogether (you should know how your class is going to be used) having a solid understanding of how virtual inheritance works is still important:
+
+So when you have a class (class A) which inherits from 2 parents (B and C), both of which share a parent (class D), as demonstrated below:
+
+#include <iostream>
+
+class D {
+public:
+    void foo() {
+        std::cout << "Foooooo" << std::endl;
+    }
+};
+
+
+class C:  public D {
+};
+
+class B:  public D {
+};
+
+class A: public B, public C {
+};
+
+int main(int argc, const char * argv[]) {
+    A a;
+    a.foo();
+}
+If you don’t use virtual inheritance in this case, you will get two copies of D in class A: one from B and one from C. To fix this you need to change the declarations of classes C and B to be virtual, as follows:
+
+class C:  virtual public D {
+};
+
+class B:  virtual public D {
+};
+
+6)
+
+How can you make sure a C++ function can be called as e.g. void foo(int, int) but not as any other type like void foo(long, long)?
+
+class A
+{
+
+public:
+	A() {}
+	~A(){}
+};
+
+class B: public A
+{
+public:
+
+	B():A(){}
+	~B(){}
+};
+
+int main(void)
+{
+  A* a = new B();
+  delete a;
+}
+}
+
+7)
+
+What is a storage class?
+
+A class that specifies the life and scope of its variables and functions is called a storage class.
+In C++ following the storage classes are supported: auto, static, register, extern, and mutable.
+Note, however, that the keyword register was deprecated in C++11. In C++17, it was removed and reserved for future use.
+
+8)
+
+How can a C function be called in a C++ program?
+
+Using an extern "C" declaration:
+//C code
+void func(int i)
+{
+//code
+}
+
+void print(int i)
+{
+//code
+}
+
+//C++ code
+extern "C"{
+	void func(int i);
+	void print(int i);
+}
+
+void myfunc(int i)
+{
+   func(i);
+   print(i);
+}
+
+9)
+
+What will be the output of the following program?
+
+#include <iostream>
+
+struct A
+{
+    int data[2];
+
+    A(int x, int y) : data{x, y} {}
+    virtual void f() {}
+};
+
+int main(int argc, char **argv)
+{
+    A a(22, 33);
+
+    int *arr = (int *) &a;
+    std::cout << arr[2] << std::endl;
+
+    return 0;
+}
+
+In the main function the instance of struct A is treated as an array of integer values. On 32-bit architectures the output will be 33, and on 64-bit architectures it will be 22. This is because there is virtual method f() in the struct which makes compiler insert a vptr pointer that points to vtable (a table of pointers to virtual functions of class or struct). On 32-bit architectures the vptr takes 4 bytes of the struct instance and the rest is the data array, so arr[2] represents access to second element of the data array, which holds value 33. On 64-bit architectures the vptr takes 8 bytes so arr[2] represents access to the first element of the data array, which holds 22.

@@ -1,0 +1,15 @@
+/jutge.org/Jutge/Backtracking/Debug
+/jutge.org/Jutge/Debug
+/jutge.org/Jutge/*.opendb
+/jutge.org/Jutge/*.db
+/jutge.org/Jutge/.vs/Jutge/v14/*.suo
+/Quizzes/*.db
+/Quizzes/.vs/Quizzes/v14/*.suo
+/Quizzes/Debug/*.ilk
+/Quizzes/Debug
+/Quizzes/Quizzes/Debug/*.log
+/Quizzes/Quizzes/Debug/Quizzes.tlog/*.tlog
+/Quizzes/Quizzes/Debug/Quizzes.tlog/*.lastbuildstate
+/Quizzes/Quizzes/Debug/*.obj
+/Quizzes/Quizzes/Debug/*.idb
+/Quizzes/Quizzes/Debug/*.pdb

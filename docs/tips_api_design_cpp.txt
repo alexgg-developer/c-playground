@@ -1,0 +1,9 @@
+-Data members of a class should always be declared private, never public or protected. p.31
+-Never return non const pointers or ferences to private data members. This breaks encapsulation. p.32
+-You can use the pimpl idiom or static function to hide private methods and move them from the header to the cpp. p.33.
+-You can declare POD that it is used only in a class as a nested private class. p.33.
+-Prefer enums to booleans to improve code readability or for more complex cases where an enum is insufficient, you could even introduce new classes to
+ensure that each argument has a unique type. In general avoid functions with multiple parameters of the same type. p.41-42
+
+
+Voy por p.35.
