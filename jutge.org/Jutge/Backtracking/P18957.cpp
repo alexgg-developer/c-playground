@@ -44,13 +44,13 @@ int main()
 	size_t totalWords;
 	totalWords = 3;
 	//cin >> totalWords;
-	//vector<string> words = { "hola", "adeu", "hi" };
-	vector<string> words = { "h", "x", "y" };
-	//vector<string> words;
+	vector<string> words = { "hola", "adeu", "hi" };
+	//vector<string> words = { "h", "x", "y" };
 	vector<string> subset;
 	vector< vector<string> > res;
 	res.push_back(subset);
-	/*string word;
+	/*vector<string> words;
+	string word;
 	words.reserve(totalWords);
 	for (size_t i = 0; i < totalWords; ++i) {
 		cin >> word;

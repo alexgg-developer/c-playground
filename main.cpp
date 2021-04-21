@@ -8,6 +8,7 @@
 #include <mutex> //THREADS
 #include <thread>
 #include <vector>
+#include <array>
 
 bool ready = false;
 std::mutex mtx;
@@ -142,16 +143,26 @@ void mainExtern()
 	printGA();
 }
 
+void mainSTL()
+{
+	std::array<int, 2> testArray{ 1, 2 };
+	testArray.fill(3);
+	std::cout << testArray[1] << std::endl;
+	//std::cout << testArray.at(3) << std::endl;
+	//std::vector<int> testVector(5);
+}
+
 int main(int argc, char *argv[]) 
 {
-  //mainInheritance();
-  //mainSingleton();
-  //mainMutex();
-  //mainTypedef();
-  //mainVirtual();
-  //mainLocks();
-  //mainPrivateInheritance();
-  mainExtern();
+	  //mainInheritance();
+	  //mainSingleton();
+	  //mainMutex();
+	  //mainTypedef();
+	  //mainVirtual();
+	  //mainLocks();
+	  //mainPrivateInheritance();
+	  //mainExtern();
+	mainSTL();
 	getchar();
 	return 0;
 }

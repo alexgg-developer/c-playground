@@ -22,7 +22,7 @@ void backtrackZerosAndOnes(size_t iterations, vector<size_t>& numbers, size_t to
 			cout << numbers[i] << " ";
 		}
 		if (numbers.size() > 0) {
-			cout << numbers[numbers.size() - 1] << endl;
+			cout << numbers[numbers.size() - 1] << endl; 
 		}
 	}
 }
